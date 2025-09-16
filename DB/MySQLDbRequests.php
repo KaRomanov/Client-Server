@@ -41,14 +41,15 @@ class MySQLDbRequests implements DbRequests
         return $userData ? User::fromArray($userData) : null;
     }
 
-    public function insertUser(string $username, string $password): ?User
+    public function insertUser(string $email, string $username, string $password): ?User
     {
         $connection = (new Db())->getConnection();
 
-        $insertStatement = $connection->prepare("INSERT INTO users (`username`, `password`) VALUES (:username, :pasword)");
+        $insertStatement = $connection->prepare("INSERT INTO users (`email`, `username`, `password`) VALUES ( :email,:username, :pasword)");
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         $insertResult = $insertStatement->execute([
+            'email' => $email,
             'username' => $username,
             'pasword' => $hashedPassword
         ]);
@@ -72,14 +73,14 @@ class MySQLDbRequests implements DbRequests
 
     }
 
-    public function validateUser(string $username, string $password): bool
+    public function validateUser(string $email, string $username, string $password): bool
     {
 
         $connection = (new Db())->getConnection();
 
-        $selectStatement = $connection->prepare("SELECT * FROM users WHERE username = :username");
+        $selectStatement = $connection->prepare("SELECT * FROM users WHERE username = :username and email = :email");
 
-        $result = $selectStatement->execute(["username" => $username]);
+        $result = $selectStatement->execute(["username" => $username, "email" => $email]);
         $user = $selectStatement->fetch(PDO::FETCH_ASSOC);
 
         if ($result && $selectStatement->rowCount() === 1 && password_verify($password, $user['password'])) {

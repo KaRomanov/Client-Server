@@ -12,12 +12,13 @@ switch ($_SERVER['REQUEST_METHOD']) {
         
         $input = json_decode(file_get_contents('php://input'), true);
         //add email!!!
+        $email = $input['email'] ?? null;
         $username = $input['username'] ?? null;
         $password = $input['password'] ?? null;
         
         // data validation
 
-        $insertedUser = DbRequestsFactory::getInstance()->insertUser($username, $password);
+        $insertedUser = DbRequestsFactory::getInstance()->insertUser($email, $username, $password);
 
         if ($insertedUser) {
             $response = $insertedUser;

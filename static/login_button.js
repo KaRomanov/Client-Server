@@ -1,10 +1,9 @@
 function validateEmail(a) {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    console.log(regex.test(email))
-    if (a === '' || regex.test(email)) {
-        return false;
+    if (a !== '' && regex.test(a)) {
+        return true;
     }
-    return true;
+    return false;
 }
 
 function validateUsername(a) {

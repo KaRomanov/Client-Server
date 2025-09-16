@@ -16,7 +16,7 @@ require_once 'bootstrap.php';
 
     <div class="account-related">
         <?php if (isset($_SESSION['username'])): ?>
-            <div class="greetings">Hello, <strong><?= htmlspecialchars($_SESSION['username']) ?></strong>! Welcome back.</div>
+            <div class="greetings">Hello, <strong><?= htmlspecialchars($_SESSION['username']) ?></strong>! Welcome back!</div>
         <?php else: ?>
             <?php header("Location: index.html"); ?>
         <?php endif; ?>
@@ -31,8 +31,10 @@ require_once 'bootstrap.php';
 
     <!-- Секция за качване на снимка -->
     <div class="change-password-section">
-
-            
+            <a href="./static/change_password.html">Click here to change password</a>
+    </div>
+    <div class="change-email-section">
+            <a href="./static/change_email.html">Click here to change email</a>
     </div>
 
 </body>

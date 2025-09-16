@@ -1,10 +1,9 @@
 function validateEmail(a) {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    console.log(regex.test(email))
-    if (a === '' || regex.test(email)) {
-        return false;
+    if (a !== '' && regex.test(a)) {
+        return true;
     }
-    return true;
+    return false;
 }
 
 function validateUsername(a) {
@@ -32,21 +31,18 @@ document.getElementById("RegisterForm").addEventListener("submit", event => {
     };
 
     if (!validateEmail(userData.email)) {
-        console.log("val")
         event.target.querySelector('.error-message').innerText = "Email is not valid!";
         event.target.querySelector('.success-message').innerText = '';
         return;
     }
 
     if (!validateUsername(userData.username)) {
-        console.log("val")
         event.target.querySelector('.error-message').innerText = "The username is not in the correct format.";
         event.target.querySelector('.success-message').innerText = '';
         return;
     }
 
     if (!validatePassword(userData.password)) {
-        console.log("val")
         event.target.querySelector('.error-message').innerText = "The password is not in the correct format.";
         event.target.querySelector('.success-message').innerText = '';
         return;
