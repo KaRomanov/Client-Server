@@ -57,3 +57,50 @@ button:hover {
     margin-bottom: 1rem;
     color: #ac0606;
 }
+
+#captchaContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin: 1rem 0;
+    padding: 0.8rem;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+#captcha {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 4px;
+    background: #e6e6e6;
+    border: 2px dashed #888;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    text-align: center;
+    color: #333;
+    font-family: 'Courier New', monospace;
+}
+
+#refreshCaptcha {
+    align-self: flex-start;
+    background-color: #007bff;
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+#refreshCaptcha:hover {
+    background-color: #0056b3;
+}
+
+#captchaInput {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 1rem;
+}

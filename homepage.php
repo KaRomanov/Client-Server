@@ -22,14 +22,12 @@ require_once 'bootstrap.php';
         <?php endif; ?>
 
         <div class="logout-button">
-        <!-- Бутон за logout -->
         <form method="post" action="logout.php">
             <button type="submit" name="logout">Log out</button>
         </form>
         </div>
     </div>
 
-    <!-- Секция за качване на снимка -->
     <div class="change-password-section">
             <a href="./static/change_password.html">Click here to change password</a>
     </div>

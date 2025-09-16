@@ -37,3 +37,28 @@ button:hover {
     left: 5%;
     padding-top: 0.75rem;
 }
+
+.change-password-section,
+.change-email-section {
+    margin-top: 1rem;
+    text-align: left;
+}
+
+.change-password-section a,
+.change-email-section a {
+    display: inline-block;
+    margin: 0.5rem 0;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.change-password-section a:hover,
+.change-email-section a:hover {
+    background-color: #007bff;
+    color: #fff;
+}

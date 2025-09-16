@@ -11,4 +11,8 @@ interface DbRequests
     public function insertUser(string $email, string $username, string $password): ?User;
 
     public function validateUser(string $email, string $username, string $password): bool;
+
+    public function updateUserPassword(string $newPassword) : bool;
+
+    public function updateUserEmail(string $newEmail) : bool;
 }

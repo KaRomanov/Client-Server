@@ -29,6 +29,13 @@
         <input type="password" id="password" name="password" required />
       </div>
 
+      <div id="captchaContainer">
+        <span id="captcha"></span>
+        <button type="button" id="refreshCaptcha">Refresh CAPTCHA</button>
+        <label for="captchaInput">Enter CAPTCHA:</label><br>
+        <input type="text" id="captchaInput" required><br>
+      </div>
+
       <button type="submit">Register</button>
       <div class="success-message"></div>
       <div class="error-message"></div>
