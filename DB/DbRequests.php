@@ -12,7 +12,7 @@ interface DbRequests
 
     public function validateUser(string $email, string $username, string $password): bool;
 
-    public function updateUserPassword(string $newPassword) : bool;
+    public function updateUserPassword(string $username, string $newPassword) : bool;
 
-    public function updateUserEmail(string $newEmail) : bool;
+    public function updateUserEmail(string $username, string $newEmail) : bool;
 }

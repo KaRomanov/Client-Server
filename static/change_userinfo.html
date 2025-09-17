@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Account Settings</title>
+  <link rel="stylesheet" href="userinfo.css">
+</head>
+
+<body>
+
+  <div class="settings-box">
+    <div class="tab-buttons">
+      <button id="emailTab" class="active">Change Email</button>
+      <button id="passwordTab">Change Password</button>
+    </div>
+
+    <!-- Change Email Section -->
+    <div id="emailSection" class="tab-content active">
+      <h2>Change Email</h2>
+      <form id="changeEmailForm">
+        <div class="form-group">
+          <label for="newEmail">New Email</label>
+          <input type="email" id="newEmail" name="newEmail" required />
+        </div>
+
+        <div class="form-group">
+          <label for="confirmEmail">Confirm New Email</label>
+          <input type="email" id="confirmEmail" name="confirmEmail" required />
+        </div>
+
+        <button type="submit" class="submit-btn">Update Email</button>
+        <div class="success-message"></div>
+        <div class="error-message"></div>
+      </form>
+    </div>
+
+    <!-- Change Password Section -->
+    <div id="passwordSection" class="tab-content">
+      <h2>Change Password</h2>
+      <form id="changePasswordForm">
+        <div class="form-group">
+          <label for="newPassword">New Password</label>
+          <input type="password" id="newPassword" name="newPassword" required />
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Confirm New Password</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" required />
+        </div>
+
+        <button type="submit" class="submit-btn">Update Password</button>
+        <div class="success-message"></div>
+        <div class="error-message"></div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Tab switching
+    const emailTab = document.getElementById("emailTab");
+    const passwordTab = document.getElementById("passwordTab");
+    const emailSection = document.getElementById("emailSection");
+    const passwordSection = document.getElementById("passwordSection");
+
+    emailTab.addEventListener("click", () => {
+      emailTab.classList.add("active");
+      passwordTab.classList.remove("active");
+      emailSection.classList.add("active");
+      passwordSection.classList.remove("active");
+    });
+
+    passwordTab.addEventListener("click", () => {
+      passwordTab.classList.add("active");
+      emailTab.classList.remove("active");
+      passwordSection.classList.add("active");
+      emailSection.classList.remove("active");
+    });
+
+    // Handle Email Change
+    document.getElementById("changeEmailForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const newEmail = document.getElementById("newEmail").value;
+      const password = document.getElementById("emailPassword").value;
+      const errorMsg = e.target.querySelector(".error-message");
+      const successMsg = e.target.querySelector(".success-message");
+      errorMsg.textContent = "";
+      successMsg.textContent = "";
+
+      fetch("../change_email.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ newEmail, password })
+      })
+        .then(r => r.json())
+        .then(response => {
+          if (response.error) {
+            errorMsg.textContent = response.error;
+          } else {
+            successMsg.textContent = "✅ Email updated successfully.";
+            e.target.reset();
+          }
+        })
+        .catch(() => {
+          errorMsg.textContent = "⚠️ Server error. Please try again later.";
+        });
+    });
+
+    // Handle Password Change
+    document.getElementById("changePasswordForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const newPassword = document.getElementById("newPassword").value;
+      const confirmPassword = document.getElementById("confirmPassword").value;
+      const errorMsg = e.target.querySelector(".error-message");
+      const successMsg = e.target.querySelector(".success-message");
+      errorMsg.textContent = "";
+      successMsg.textContent = "";
+
+      if (newPassword !== confirmPassword) {
+        errorMsg.textContent = "❌ Passwords do not match.";
+        return;
+      }
+
+      fetch("../change_password.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ newPassword })
+      })
+        .then(r => r.json())
+        .then(response => {
+          if (response.error) {
+            errorMsg.textContent = response.error;
+          } else {
+            successMsg.textContent = "✅ Password updated successfully.";
+            e.target.reset();
+          }
+        })
+        .catch(() => {
+          errorMsg.textContent = "⚠️ Server error. Please try again later.";
+        });
+    });
+  </script>
+
+</body>
+
+</html>

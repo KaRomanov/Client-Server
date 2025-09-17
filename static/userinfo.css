@@ -1,0 +1,88 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #eef2f3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.settings-box {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 360px;
+}
+
+.tab-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1.5rem;
+}
+
+.tab-buttons button {
+    flex: 1;
+    padding: 0.6rem;
+    border: none;
+    cursor: pointer;
+    background: #ddd;
+    font-weight: bold;
+    border-radius: 5px 5px 0 0;
+    transition: background 0.3s;
+}
+
+.tab-buttons button.active {
+    background: #007bff;
+    color: #fff;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.5rem;
+    box-sizing: border-box;
+}
+
+button.submit-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #28a745;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 0.5rem;
+}
+
+button.submit-btn:hover {
+    background-color: #218838;
+}
+
+.error-message {
+    margin-top: 1rem;
+    color: #ac0606;
+}
+
+.success-message {
+    margin-top: 1rem;
+    color: #003b00;
+}

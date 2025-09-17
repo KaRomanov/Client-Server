@@ -6,28 +6,23 @@ require_once './Classes/validateFunctions.php';
 $response = null;
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
-        $response['is_logged_in'] = Session::isLoggedIn();
+        $response['error'] = "Not a valid method!";
         break;
     case 'POST':
 
+        // when the request sends json data
         $input = json_decode(file_get_contents('php://input'), true);
         
-        $email = $input['email'] ?: null;
-        $username = $input['username'] ?: null;
+        $username = $_SESSION['username'];
         $password = $input['password'] ?: null;
-
-        if(!validateEmail($email) || !validatePassword($password) || !validateUsername($username)) {
-            $response['error'] = 'Form data is not valid!';
+        
+        if(!validatePassword($password)){
+            $response['error'] = 'Invalid password!';
             break;
         }
 
-        $validUser = DbRequestsFactory::getInstance()->validateUser($email, $username, $password);
-
-        if ($validUser) {
-            $response['success'] = $validUser;
-
-            Session::login($username);
-
+        if (DbRequestsFactory::getInstance()->updateUserPassword($username, $password);) {
+            $response['success'] = "Password updated!";
             echo json_encode(['redirect' => '../homepage.php']);
             exit;
         }

@@ -1,6 +1,7 @@
 <?php
 
 require_once './bootstrap.php';
+require_once './Classes/validateFunctions.php';
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
@@ -11,12 +12,16 @@ switch ($_SERVER['REQUEST_METHOD']) {
         // register a new user
         
         $input = json_decode(file_get_contents('php://input'), true);
-        //add email!!!
+    
         $email = $input['email'] ?? null;
         $username = $input['username'] ?? null;
         $password = $input['password'] ?? null;
         
         // data validation
+        if(!(validateEmail($email) && validatePassword($password) && validateUsername($username))) {
+            $response['error'] = 'Form data is not valid!';
+            break;
+        }
 
         $insertedUser = DbRequestsFactory::getInstance()->insertUser($email, $username, $password);
 

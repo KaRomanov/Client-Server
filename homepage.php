@@ -28,11 +28,8 @@ require_once 'bootstrap.php';
         </div>
     </div>
 
-    <div class="change-password-section">
-            <a href="./static/change_password.html">Click here to change password</a>
-    </div>
-    <div class="change-email-section">
-            <a href="./static/change_email.html">Click here to change email</a>
+    <div class="user-info-section">
+            <a href="./static/change_userinfo.html">Click here to change user info</a>
     </div>
 
 </body>

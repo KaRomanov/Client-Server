@@ -90,11 +90,11 @@ class MySQLDbRequests implements DbRequests
         return false;
     }
 
-    public function updateUserEmail(string $newEmail): bool{
+    public function updateUserEmail(string $username, string $newEmail): bool{
 
     }
 
-    public function updateUserPassword(string $newPassword): bool{
+    public function updateUserPassword(string $username, string $newPassword): bool{
         
     }
 
