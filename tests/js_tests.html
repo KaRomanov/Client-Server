@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Validation Function Tests</title>
+</head>
+<body>
+  <h2>Validation Tests</h2>
+  <pre id="results"></pre>
+
+  <script>
+
+    function validateEmail(a) {
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (a !== '' && regex.test(a)) {
+        return true;
+      }
+      return false;
+    }
+
+    function validateUsername(a) {
+      if (a === '' || a.length < 6) {
+        return false;
+      }
+      return true;
+    }
+
+    function validatePassword(a) {
+      if (a === '' || a.length < 8) {
+        return false;
+      }
+      return true;
+    }
+
+
+    function assertEquals(actual, expected, message) {
+      if (actual === expected) {
+        log(`PASS: ${message}`);
+      } else {
+        log(`FAIL: ${message} (expected ${expected}, got ${actual})`);
+      }
+    }
+
+    function log(msg) {
+      document.getElementById("results").textContent += msg + "\n";
+      console.log(msg);
+    }
+
+
+    function runTests() {
+
+      assertEquals(validateEmail("test@example.com"), true, "valid email");
+      assertEquals(validateEmail("bademail.com"), false, "missing @");
+      assertEquals(validateEmail("badem@ailcom"), false, "missing top level domain");
+      assertEquals(validateEmail(""), false, "empty email");
+
+
+      assertEquals(validateUsername("abcdef"), true, "valid username");
+      assertEquals(validateUsername("abc"), false, "short username");
+      assertEquals(validateUsername(""), false, "empty username");
+
+ 
+      assertEquals(validatePassword("mypassword"), true, "valid password");
+      assertEquals(validatePassword(""), false, "empty password");
+      assertEquals(validatePassword("short"), false, "too short password");
+    }
+
+    runTests();
+  </script>
+</body>
+</html>

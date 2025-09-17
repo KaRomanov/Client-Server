@@ -14,7 +14,7 @@ function validateUsername(a) {
 }
 
 function validatePassword(a) {
-    if (a === '0' || a.length < 8) {
+    if (a === '' || a.length < 8) {
         return false;
     }
     return true;
