@@ -14,17 +14,16 @@ switch ($_SERVER['REQUEST_METHOD']) {
         $input = json_decode(file_get_contents('php://input'), true);
         
         $username = $_SESSION['username'];
-        $password = $input['password'] ?: null;
+        $password = $input['newPassword'] ?: null;
         
         if(!validatePassword($password)){
             $response['error'] = 'Invalid password!';
             break;
         }
 
-        if (DbRequestsFactory::getInstance()->updateUserPassword($username, $password);) {
+        if (DbRequestsFactory::getInstance()->updateUserPassword($username, $password)) {
             $response['success'] = "Password updated!";
-            echo json_encode(['redirect' => '../homepage.php']);
-            exit;
+            break;
         }
 
         $response['success'] = false;

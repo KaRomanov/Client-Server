@@ -14,20 +14,20 @@ switch ($_SERVER['REQUEST_METHOD']) {
         $input = json_decode(file_get_contents('php://input'), true);
         
         $username = $_SESSION['username'];
-        $email = $input['email'] ?: null;
+        $email = $input['newEmail'] ?: null;
+        
         
         if(!validateEmail($email)){
             $response['error'] = 'Invalid email format!';
             break;
         }
 
-        if (DbRequestsFactory::getInstance()->updateUserEmail($username, $email);) {
+        if (DbRequestsFactory::getInstance()->updateUserEmail($username, $email)) {
             $response['success'] = "Email updated!";
-            echo json_encode(['redirect' => '../homepage.php']);
-            exit;
+            break;
         }
 
-        $response['success'] = false;
+        $response['error'] = true;
         break;
 }
 

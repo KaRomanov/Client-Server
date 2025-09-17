@@ -91,11 +91,29 @@ class MySQLDbRequests implements DbRequests
     }
 
     public function updateUserEmail(string $username, string $newEmail): bool{
+        $connection = (new Db())->getConnection();
 
+        $selectStatement = $connection->prepare('UPDATE users SET email = :email WHERE username = :username');
+        
+        $result = $selectStatement->execute(["email" => $newEmail, "username" => $username]);
+        if($result){
+            return true;
+        }
+        return false;
     }
 
     public function updateUserPassword(string $username, string $newPassword): bool{
+        $connection = (new Db())->getConnection();
+
         
+        $selectStatement = $connection->prepare("UPDATE users SET password = :password WHERE username = :username");
+        $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+        $result = $selectStatement->execute(["password" => $hashedPassword,"username"=> $username]);
+
+        if($result){
+            return true;
+        }
+        return false;
     }
 
 }
